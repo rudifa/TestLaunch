@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ViewController2.swift
 //  TestLaunch
 //
 //  Created by Rudolf Farkas on 31.03.20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController2: UIViewController {
     lazy var connectedLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,15 +61,35 @@ class ViewController: UIViewController {
             testConnectionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
         ])
 
-        NetworkMonitor.shared.callback = { isConnected in
-            DispatchQueue.main.async {
-                self.connectedLabel.text = isConnected ? "connected" : "disconnected"
-            }
-        }
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+
+        activateNetworkStatus()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        printClassAndFunc()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         printClassAndFunc()
+    }
+
+    deinit {
+        printClassAndFunc()
+    }
+
+    private func activateNetworkStatus() {
+        NetworkMonitor.shared.handler = { [weak self] isConnected in
+            DispatchQueue.main.async {
+                self?.connectedLabel.text = isConnected ? "connected" : "disconnected"
+            }
+        }
+    }
+
+    @objc func handleTap() {
+        printClassAndFunc()
+        performSegue(withIdentifier: "unwindToVC", sender: self)
     }
 }
