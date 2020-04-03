@@ -9,29 +9,9 @@
 import UIKit
 
 class ViewController2: UIViewController {
-    lazy var connectedLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        // backgroundColor = .systemBlue // uncomment for visual debugging
-        label.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
-        label.text = "unknown"
-        label.textAlignment = .center
-        label.sizeToFit()
-        return label
-    }()
+    private lazy var connectedLabel = UILabel.configuredLabel(text: "unknown")
 
-    lazy var testConnectionButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.white, for: .normal)
-        // backgroundColor = .gray // uncomment for visual debugging
-        button.titleLabel?.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
-        button.setTitle("test connection", for: .normal)
-        button.sizeToFit()
-        button.addTarget(self, action: #selector(testConnectionButtonTap), for: .touchUpInside)
-        return button
-    }()
+    private lazy var testConnectionButton = UIButton.actionButton(title: "test connection", action: testConnectionButtonTap)
 
     @objc func testConnectionButtonTap(sender: Any) {
         let title = "Network is"

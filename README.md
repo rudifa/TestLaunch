@@ -48,7 +48,7 @@ Notes:
 2. The app may go into the background and later come back from background.
 
 3. Each ViewController shall have a Network StatusLabel just underneath the Status Bar.
-StatusLabel shall be invisible (hidden) whenever the devce is connected to the internet, and visible with text "∆ No Network" when disconnected.
+StatusLabel shall be invisible (hidden) whenever the device is connected to the internet, and visible with text "∆ No Network" when disconnected.
 
 StatusLabel shall be updated or kept up to date:
 3.1 when a presented ViewController appears on the screen (hiding the presenting VC)

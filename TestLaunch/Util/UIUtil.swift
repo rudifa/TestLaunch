@@ -1,5 +1,5 @@
 //
-//  UIUtil.swift v.0.2.2
+//  UIUtil.swift v.0.2.3
 //  SwiftUtilBiP
 //
 //  Created by Rudolf Farkas on 04.09.18.
@@ -55,6 +55,20 @@ extension UIColor {
 
 // MARK: factory methods
 
+extension UILabel {
+    static func configuredLabel(text: String) -> UILabel {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        // backgroundColor = .systemBlue // uncomment for visual debugging
+        label.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        label.text = text
+        label.textAlignment = .center
+        label.sizeToFit()
+        return label
+    }
+}
+
 // https://cocoacasts.com/elegant-controls-in-swift-with-closures
 /// Button with storage for an action callback
 class ButtonWithAction: UIButton {
@@ -94,8 +108,8 @@ extension UIButton {
         let button = ButtonWithAction(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemGray // uncomment for visual debugging
-        button.titleLabel?.font = .systemFont(ofSize: 16)
+        button.backgroundColor = .clear // uncomment for visual debugging
+        button.titleLabel?.font = .preferredFont(forTextStyle: UIFont.TextStyle.title3)
         button.setTitle(title, for: .normal)
         button.sizeToFit()
         button.actionCallback = action
